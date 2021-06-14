@@ -14,3 +14,12 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+## Testing
+
+We haven't seen how to write tests for code that uses Tickers.
+
+If you would like to explore this, I this article:
+
+Why Flutter animations need a vsync/TickerProvider
+<https://dash-overflow.net/articles/why_vsync/>
