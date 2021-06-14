@@ -8,19 +8,21 @@ class StopwatchRenderer extends StatelessWidget {
   const StopwatchRenderer({
     Key? key,
     required this.elapsed,
+    required this.radius,
   }) : super(key: key);
+
   final Duration elapsed;
+  final double radius;
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Transform(
-          transform: Matrix4.rotationZ(pi / 4),
-          alignment: Alignment.center,
-          child: Container(
-            color: Colors.indigo,
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(width: 3, color: Colors.orange),
+            borderRadius: BorderRadius.circular(radius),
           ),
-        ),
+        )
         // ElapsedTimeText(
         //   elapsed: elapsed,
         // ),

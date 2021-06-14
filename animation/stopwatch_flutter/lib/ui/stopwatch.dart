@@ -43,6 +43,14 @@ class _StopwatchState extends State<Stopwatch>
     // return ElapsedTimeTextBasic(
     //   elapsed: _elapsed,
     // );
-    return StopwatchRenderer(elapsed: _elapsed);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final radius = constraints.maxWidth / 2;
+        return StopwatchRenderer(
+          elapsed: _elapsed,
+          radius: radius,
+        );
+      },
+    );
   }
 }
