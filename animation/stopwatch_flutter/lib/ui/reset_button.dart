@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ResetButton extends StatelessWidget {
-  const ResetButton({Key? key, required this.isRunning, this.onPressed})
-      : super(key: key);
-  final bool isRunning;
+  const ResetButton({Key? key, this.onPressed}) : super(key: key);
   final VoidCallback? onPressed;
 
   @override
