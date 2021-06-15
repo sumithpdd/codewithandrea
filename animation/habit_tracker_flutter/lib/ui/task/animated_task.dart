@@ -7,6 +7,7 @@ import 'package:habit_tracker_flutter/ui/theming/app_theme.dart';
 class AnimatedTask extends StatefulWidget {
   const AnimatedTask({Key? key, required this.iconName}) : super(key: key);
   final String iconName;
+
   @override
   _AnimatedTaskState createState() => _AnimatedTaskState();
 }
@@ -16,7 +17,6 @@ class _AnimatedTaskState extends State<AnimatedTask>
   late final AnimationController _animationController;
   late final Animation<double> _curveAnimation;
   bool _showCheckIcon = false;
-
   @override
   void initState() {
     super.initState();
@@ -32,6 +32,7 @@ class _AnimatedTaskState extends State<AnimatedTask>
 
   @override
   void dispose() {
+    _animationController.removeStatusListener(_checkStatusUpdates);
     _animationController.dispose();
     super.dispose();
   }
@@ -41,7 +42,6 @@ class _AnimatedTaskState extends State<AnimatedTask>
       if (mounted) {
         setState(() => _showCheckIcon = true);
       }
-
       Future.delayed(Duration(seconds: 1), () {
         if (mounted) {
           setState(() => _showCheckIcon = false);
@@ -58,7 +58,7 @@ class _AnimatedTaskState extends State<AnimatedTask>
     }
   }
 
-  void _handleTapUpCanel() {
+  void _handleTapCancel() {
     if (_animationController.status != AnimationStatus.completed) {
       _animationController.reverse();
     }
@@ -68,8 +68,8 @@ class _AnimatedTaskState extends State<AnimatedTask>
   Widget build(BuildContext context) {
     return GestureDetector(
       onTapDown: _handleTapDown,
-      onTapUp: (_) => _handleTapUpCanel(),
-      onTapCancel: _handleTapUpCanel,
+      onTapUp: (_) => _handleTapCancel(),
+      onTapCancel: _handleTapCancel,
       child: AnimatedBuilder(
         animation: _curveAnimation,
         builder: (BuildContext context, Widget? child) {
@@ -78,7 +78,6 @@ class _AnimatedTaskState extends State<AnimatedTask>
           final hasCompleted = progress == 1.0;
           final iconColor =
               hasCompleted ? themeData.accentNegative : themeData.taskIcon;
-
           return Stack(
             children: [
               TaskCompletionRing(
@@ -91,7 +90,7 @@ class _AnimatedTaskState extends State<AnimatedTask>
                       : widget.iconName,
                   color: iconColor,
                 ),
-              )
+              ),
             ],
           );
         },
