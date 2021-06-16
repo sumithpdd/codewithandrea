@@ -9,9 +9,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final dataStore = HiveDataStore();
     return ValueListenableBuilder(
-      valueListenable: dataStore.taskListenable(),
-      builder: (_, Box<Task> box, __) =>
-          TasksGridPage(tasks: box.values.toList()),
+      valueListenable: dataStore.tasksListenable(),
+      builder: (_, Box<Task> box, __) => TasksGridPage(
+        tasks: box.values.toList(),
+      ),
     );
   }
 }

@@ -8,8 +8,9 @@ class HiveDataStore {
 
   Future<void> init() async {
     await Hive.initFlutter();
+    // register adapters
     Hive.registerAdapter<Task>(TaskAdapter());
-
+    // open boxes
     await Hive.openBox<Task>(tasksBoxName);
   }
 
@@ -26,7 +27,7 @@ class HiveDataStore {
     }
   }
 
-  ValueListenable<Box<Task>> taskListenable() {
+  ValueListenable<Box<Task>> tasksListenable() {
     return Hive.box<Task>(tasksBoxName).listenable();
   }
 }
