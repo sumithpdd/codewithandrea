@@ -69,3 +69,27 @@ To build this (including the animation part) we'll need:
 - if we want to draw shapes that are proportional to the size of the parent widget, we can create variables that depend on the size argument
 - it's a good idea to make our painters customisable by passing some values as arguments, just like we would do if we were creating custom widgets.
 - we can implement the shouldRepaint method is such a way that it only returns true when something changes, and this helps with performance.
+
+## Hive Notes
+
+Once we have a Hive object with type annotations, we need to generate a type adapter.
+
+As our file is called task.dart, we need to add:
+
+``` dart
+part 'task.g.dart';
+```
+
+Then we can run this on the terminal:
+
+``` powershell
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+
+This will generate a TaskAdapter that contains:
+
+- a read() method
+- a write() method
+- hashCode and operator ==
+
+> Note: if you make any changes to your model classes, run the code generator again to ensure that the generated code is up to date.
